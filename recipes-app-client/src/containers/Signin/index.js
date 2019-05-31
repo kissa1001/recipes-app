@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { FormGroup, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton";
-import useForm from "../../useForm";
+import useForm from "react-hook-form";
 import { Auth } from "aws-amplify";
 import "./Signin.css";
 
 const Signin = props => {
   const [isLoading, setLoading] = useState(false);
 
-  const handleSignin = async () => {
+  const handleSignin = async values => {
     setLoading(true);
     try {
       await Auth.signIn(values.email, values.password);
@@ -20,31 +20,28 @@ const Signin = props => {
     }
   };
 
-  const { values, handleChange, handleSubmit } = useForm(handleSignin);
+  const { register, handleSubmit, errors } = useForm({
+    mode: "onBlur"
+  });
 
   return (
     <div className="Signin">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(handleSignin)}>
         <FormGroup controlId="email" bsSize="large">
           <ControlLabel>Email</ControlLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            name="email"
-            onChange={handleChange}
-            value={values.email}
-            required
-          />
+          <br />
+          <input type="email" name="email" ref={register({ required: true })} />
+          {errors.email && "Email is required."}
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
-          <FormControl
+          <br />
+          <input
             type="password"
             name="password"
-            onChange={handleChange}
-            value={values.password}
-            required
+            ref={register({ required: true })}
           />
+          {errors.password && "Password is required."}
         </FormGroup>
         <LoaderButton
           block
