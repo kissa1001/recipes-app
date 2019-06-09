@@ -32,6 +32,7 @@ const Recipe = props => {
         alert(e);
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getRecipe = () => {
@@ -83,11 +84,15 @@ const Recipe = props => {
     }
   };
 
+  const deleteRecipe = () => {
+    return API.del("recipes", `/recipes/${props.match.params.id}`);
+  };
+
   const handleDelete = async event => {
     event.preventDefault();
 
     const confirmed = window.confirm(
-      "Are you sure you want to delete this note?"
+      "Are you sure you want to delete this recipe?"
     );
 
     if (!confirmed) {
@@ -95,6 +100,14 @@ const Recipe = props => {
     }
 
     setisDeleting(true);
+
+    try {
+      await deleteRecipe();
+      props.history.push("/");
+    } catch (e) {
+      alert(e);
+      setisDeleting(false);
+    }
   };
 
   return (

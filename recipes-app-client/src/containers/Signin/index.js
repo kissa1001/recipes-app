@@ -13,7 +13,6 @@ const Signin = props => {
     try {
       await Auth.signIn(values.email, values.password);
       props.setAuthenticated(true);
-      props.history.push("/");
     } catch (e) {
       alert(e.message);
       setLoading(true);
