@@ -1,11 +1,12 @@
 export default {
+  MAX_ATTACHMENT_SIZE: 5000000,
   s3: {
     REGION: "us-east-1",
     BUCKET: "recipes-app-code"
   },
   apiGateway: {
-    REGION: "https://94724qy9hl.execute-api.us-east-1.amazonaws.com/prod/",
-    URL: "us-east-1"
+    REGION: "us-east-1",
+    URL: "https://94724qy9hl.execute-api.us-east-1.amazonaws.com/prod"
   },
   cognito: {
     REGION: "us-east-1",

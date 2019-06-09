@@ -1,8 +1,8 @@
-.NewRecipe form {
+.recipes form {
   padding-bottom: 15px;
 }
 
-.NewRecipe form textarea {
+.recipes form textarea {
   height: 300px;
   font-size: 24px;
 }
