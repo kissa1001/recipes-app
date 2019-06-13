@@ -35,6 +35,12 @@ const Home = ({ authenticated }) => {
       <div className="lander">
         <h1>Yummly</h1>
         <p>A simple recipe taking app</p>
+        <p>
+          If you want to test this app, but don't want to signup for an account,
+          please use the following credentials:
+        </p>
+        <p>Username: lina@dmi.ai</p>
+        <p>Password: Password123!</p>
       </div>
     );
   };
